@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $files = Post::all();
+    // ddd($files);
+    return view('posts', [
+        'posts' => $files
+    ]);
+});
+
+Route::get('posts/{id}', function ($id) {
+
+    return view('post', [
+        'post' => Post::find($id)
+    ]);
 });
