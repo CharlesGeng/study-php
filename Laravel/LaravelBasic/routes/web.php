@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -15,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $files = Post::all();
-    // ddd($files);
+
+    // dd($files);
     return view('posts', [
-        'posts' => $files
+        'posts' => Post::with("category")->get()
     ]);
 });
 
@@ -26,5 +27,12 @@ Route::get('posts/{id}', function ($id) {
 
     return view('post', [
         'post' => Post::find($id)
+    ]);
+});
+
+Route::get('categories/{category:slug}', function (Category $category) {
+    // dd($category->posts);
+    return view('posts', [
+        'posts' => $category->posts
     ]);
 });
