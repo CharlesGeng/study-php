@@ -12,9 +12,9 @@
 <body>
     <article>
         <h1>{{$post->title}}</h1>
-        <div>
+        <p>
             {{$post->body}}
-        </div>
+        </p>
     </article>
     <a href="/">Go Back</a>
 </body>
